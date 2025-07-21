@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobName</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+ <style>
+    body {
+      font-family: "Prompt", sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0; /* เพิ่มเพื่อลบ margin เริ่มต้นของ body */
+    }
+
+    .form-container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 30px; /* เพิ่ม padding เพื่อให้มีพื้นที่ภายในมากขึ้น */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 800px; /* เพิ่มความกว้างสูงสุดของ form-container */
+      margin: 0 auto; /* จัดให้อยู่กลางจอ */
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #495057;
+    }
+
+    .form-control {
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #6c757d;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h3 class="text-center mb-3">แบบฟอร์มประกาศรับสมัครงาน</h3><br>
+    <form id="bookmyFormadmin" method="POST" onsubmit="booksubmitFormadmin(); return false;" class="row g-2">
+      <div class="col-12 col-md-6 mb-2">
+        <div class="form-group">
+          <label>&nbsp;ผู้ลงประกาศ</label>
+          <input type="text" class="form-control" id="jobnamesave" name="jobnamesave" style="color:blue;" list="list" required>
+        </div>
+      </div>
+      
+            <div class="col-12 col-md-6 mb-2">
+        <div class="form-group">
+          <label>&nbsp;ตำแหน่งที่รับสมัคร</label>
+          <input type="text" class="form-control" id="jobname" name="jobname" style="color:blue;" list="list" required>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 mb-2">
+        <div class="form-group">
+          <label>&nbsp;แผนกที่รับสมัคร</label>
+          <select class="form-select" id="jobdep" name="jobdep" aria-label="Default select example" style="color:blue;" required>
+            <option value=''></option>
+            <option value="จัดซื้อ">จัดซื้อ</option>
+            <option value="บุคคลธุการ">บุคคลธุการ</option>
+            <option value="บัญชี">บัญชี</option>
+            <option value="สิ่งแวดล้อม">สิ่งแวดล้อม</option>
+            <option value="ห้องLAB">ห้องLAB</option>
+            <option value="จป">จป</option>
+            <option value="สโตร์และรับสินค้า">สโตร์และรับสินค้า</option>
+            <option value="ช่าง">ช่าง</option>
+            <option value="ผลิต">ผลิต</option>
+            <option value="คิวซี">คิวซี</option>
+            <option value="แพ็คกิ้ง">แพ็คกิ้ง</option>
+            <option value="ไอที">ไอที</option>
+            <option value="DC">DC</option>
+            <option value="รับวัตถุดิบ">รับวัตถุดิบ</option>
+            <option value="ผู้บริหาร">ผู้บริหาร</option>
+            <option value="ส่งเสริมการเกษตร">ส่งเสริมการเกษตร</option>
+            <option value="R&D">R&D</option>
+            <option value="ตามลักษณะการพิการ">ตามลักษณะการพิการ</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 mb-2">
+        <div class="form-group">
+          <label>&nbsp;อายุ</label>
+          <input type="tel" class="form-control" id="jobage" name="jobage" style="color:blue;" list="list" required>
+        </div>
+      </div>
+      
+       <div class="col-12 col-md-3 mb-2">
+        <div class="form-group">
+          <label>&nbsp;สถานะการรับสมัคร</label>
+          <select class="form-select" id="jobopen" name="jobopen" aria-label="Default select example" style="color:blue;" required>
+            <option value=''>-เลือก-</option>
+            <option value="เปิดรับสมัคร">เปิดรับสมัคร</option>
+            <option value="เปิดรับสมัคร ด่วน!!!">เปิดรับสมัคร ด่วน!!!</option>
+            <option value="ปิดรับสมัคร">ปิดรับสมัคร</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 mb-2">
+        <div class="form-group">
+          <label>&nbsp;ส่วนสูง</label>
+<!--           <input type="text" class="form-control" id="jobheight" name="jobheight" style="color:blue;" required> -->
+           <select class="form-select" id="jobheight" name="jobheight" aria-label="Default select example" style="color:blue;" required>
+            <option value=''>-เลือก-</option>
+            <option value="150 ซม.ขึ้นไป">150 ซม.ขึ้นไป</option>
+            <option value="155 ซม.ขึ้นไป">155 ซม.ขึ้นไป</option>
+             <option value="160 ซม.ขึ้นไป">160 ซม.ขึ้นไป</option>
+             <option value="165 ซม.ขึ้นไป">165 ซม.ขึ้นไป</option>
+          </select>
+        </div>
+      </div>
+
+
+       <div class="col-6 col-md-4 mb-2">
+        <div class="form-group">
+          <label>&nbsp;รายวัน/เดือน</label>
+          <select class="form-select" id="jobchoose" name="jobchoose" aria-label="Default select example" style="color:blue;" required>
+            <option value=''>-เลือก-</option>
+            <option value="รายวัน">รายวัน</option>
+            <option value="รายเดือน">รายเดือน</option>
+            <option value="รายวัน-คนพิการ">รายวัน-คนพิการ</option>
+          </select>
+        </div>
+      </div>
+      
+     <div class="col-6 col-md-4 mb-2">
+        <div class="form-group">
+          <label>&nbsp;จำนวนอัตรา</label>
+          <input type="tel" class="form-control" id="jobrate" name="jobrate" style="color:blue;" required>
+        </div>
+      </div>
+      
+      
+      <div class="col-6 col-md-4 mb-2">
+        <div class="form-group">
+          <label>&nbsp;วุฒิการศึกษา</label>
+<!--           <input type="text" class="form-control" id="jobeducational" name="jobeducational" style="color:blue;" required> -->
+           <select class="form-select" id="jobeducational" name="jobeducational" aria-label="Default select example" style="color:blue;" required>
+            <option value=''>-เลือก-</option>
+            <option value="ป.4 ขึ้นไป">ป.4 ขึ้นไป</option>
+            <option value="ป.6 ขึ้นไป">ป.6 ขึ้นไป</option>
+             <option value="ม.3 ขึ้นไป">ม.3 ขึ้นไป</option>
+             <option value="ม.6/ปวช ขึ้นไป">ม.6/ปวช ขึ้นไป</option>
+             <option value="ปวส ขึ้นไป">ปวส ขึ้นไป</option>
+             <option value="ปริญญาตรี ขึ้นไป">ปริญญาตรี ขึ้นไป</option>
+             <option value="ปริญญาโท ขึ้นไป">ปริญญาโท ขึ้นไป</option>
+             <option value="ปริญญาเอก ขึ้นไป">ปริญญาเอก ขึ้นไป</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="col-12 col-md-6 mb-2">
+        <div class="form-group">
+          <label>&nbsp;คุณสมบัติ</label>
+          <textarea class="form-control" id="jobfeature" name="jobfeature" rows="4" style="color:blue;"></textarea>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 mb-2">
+        <div class="form-group">
+          <label>&nbsp;ลักษณะงาน</label>
+          <textarea class="form-control" id="jobother" name="jobother" rows="3" style="color:blue;"></textarea>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center mt-4">
+        <button type="submit" onclick="booksubmitFormadmin()" class="btn bg-primary col-12 text-white">
+          <i class="fas fa-paper-plane"></i> บันทึกข้อมูล
+        </button>
+      </div>
+    </form>
+    <div class="footer">
+      <p><i class="far fa-copyright"></i>จัดทำโดย นาย ภาคภูมิ เรือนมูล HrSupport</p>
+    </div>
+  </div>
+  <script>
+
+       var googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyLJauIc1kRYqHgxiIhADFZpzYATgX9zHGAaqL-W0ICZix1qlD1sOu83wPlaHG0284h/exec';
+    
+      function booksubmitFormadmin() {
+  event.preventDefault();
+  Swal.fire({
+    position: 'center',
+    title: '<h4>กำลังบันทึกข้อมูล...</h4>',
+    showConfirmButton: false,
+  });
+  Swal.showLoading();
+
+  // ดึงค่าจากฟอร์ม
+  var jobnamesave = document.getElementById('jobnamesave').value;
+  var jobname = document.getElementById('jobname').value;
+  var jobdep = document.getElementById('jobdep').value;
+  var jobage = document.getElementById('jobage').value;
+  var jobheight = document.getElementById('jobheight').value;
+  var jobeducational = document.getElementById('jobeducational').value;
+  var jobfeature = document.getElementById('jobfeature').value;
+  var jobother = document.getElementById('jobother').value;
+  var jobopen = document.getElementById('jobopen').value;
+  var jobchoose = document.getElementById('jobchoose').value;
+  var jobrate = document.getElementById('jobrate').value;
+
+ if (jobnamesave == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกชื่อของท่าน</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobname == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกตำแหน่งงาน</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobdep == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณาเลือกแผนกที่รับสมัคร</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobage == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกช่วงอายุ</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobopen == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกสถานะการรับสมัคร</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobheight == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกส่วนสูงที่ต้องการ</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobchoose == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณาเลือกรายวันหรือรายเดือน</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobrate == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณาใส่จำนวนอัตรา</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobeducational == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกวุฒิการศึกษาที่ต้องการรับ</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  } else if (jobfeature == "") {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: '<h4>กรุณากรอกคุณสมบัติที่ต้องการรับ</h4>',
+      showConfirmButton: true,
+      confirmButtonText: 'OK',
+    });
+    return;
+  }
+
+  var formData = new FormData();
+  formData.append('jobnamesave', jobnamesave);
+  formData.append('jobname', jobname);
+  formData.append('jobdep', jobdep);
+  formData.append('jobage', jobage);
+  formData.append('jobheight', jobheight);
+  formData.append('jobeducational', jobeducational);
+  formData.append('jobfeature', jobfeature);
+  formData.append('jobother', jobother);
+  formData.append('jobopen', jobopen);
+  formData.append('jobchoose', jobchoose);
+  formData.append('jobrate', jobrate);
+  formData.append('action', 'submitFormadmin');
+
+  fetch(googleScriptUrl, {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => response.text())
+    .then(data => {
+      if (data == "true") {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<h4>บันทึกข้อมูลสำเร็จ</h4>',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        document.getElementById('bookmyFormadmin').reset();
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<h4>เกิดข้อผิดพลาดในการบันทึกข้อมูล</h4>',
+          showConfirmButton: true,
+          confirmButtonText: 'OK',
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '<h4>เกิดข้อผิดพลาดในการเชื่อมต่อ</h4>',
+        showConfirmButton: true,
+        confirmButtonText: 'OK',
+      });
+    });
+}
+    
+
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
