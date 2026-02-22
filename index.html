@@ -1,676 +1,1196 @@
-
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
-
-  <head>
+<html lang="th">
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="เว็บไซต์ประชาสัมพันธ์ข่าวสารและตำแหน่งงานของแผนก HR บริษัท Cm2">
-    <meta name="keywords" content="HR, ตำแหน่งงาน, รับสมัครงาน, Cm2">
-    <meta name="author" content="นาย ภาคภูมิ เรือนมูล">
-    <title>Admin HR Support</title>
-
-
-<!-- เพิ่ม Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- เพิ่ม Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
- 
-      <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-  <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
-       <!-- LineSeed Fonts -->
-  <link href="https://cdn.jsdelivr.net/gh/maketline/goodday/font/stylesheet.min.css" rel="stylesheet">
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-<!--     <link href="https://themewagon.github.io/jobest/v1.0.0/assets/css/theme.min.css" rel="stylesheet" /> -->
+    <title>HR Support - ระบบจัดการประกาศรับสมัครงาน</title>
     
-    <link href="style.css" rel="stylesheet">
-    <!-- เพิ่ม jQuery -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-  </head>
-<style>
-      body {
-      font-family: "line_seed_sans_th", sans-serif;
-      font-weight: bold;
-      font-size: 12px;
-      background-color: #f8f9fa;
-    }   
-      .spinner-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%; 
-    } 
-      #data-tableday th {
-      background-color: #0d6efd; /* สีเฮดเดอร์datatable */
-      color: #ffffff; /* สีข้อความในเฮดเดอร์datatable */
-    }
-      #data-tablemonth th {
-      background-color: green; /* สีเฮดเดอร์datatable */
-      color: #ffffff; /* สีข้อความในเฮดเดอร์datatable */
-    }
-  
-    #data-tabledisabledperson th {
-      background-color: brown; /* สีเฮดเดอร์datatable */
-      color: #ffffff; /* สีข้อความในเฮดเดอร์datatable */
-    }
-  
-  /* ซ่อนปุ่ม + ที่ DataTables สร้างขึ้น */
-table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
-    display: none !important;
+        /* Login Page Styles */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border: none;
+        }
+
+        .login-header h2 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .login-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .login-body {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .form-control {
+            height: 50px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            padding-left: 45px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.1);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            height: 50px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+        }
+
+        .alert {
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255,255,255,0.9);
+            font-size: 12px;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #667eea;
+        }
+
+        /* Admin Page Styles */
+        .admin-page {
+            display: none;
+        }
+
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --success-color: #4cc9f0;
+            --danger-color: #f72585;
+            --warning-color: #f8961e;
+            --dark-color: #1e1e2f;
+            --light-color: #f8f9fa;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark-color) !important;
+        }
+
+        .navbar-brand span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+
+        .user-info i {
+            margin-right: 8px;
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, var(--danger-color), #b5179e);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: transform 0.3s;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 100px 0 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 {
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--success-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs {
+            border: none;
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .nav-tabs .nav-link i {
+            margin-right: 8px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .table {
+            margin-bottom: 0;
+            min-width: 800px;
+        }
+
+        .table thead th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: 500;
+            border: none;
+            padding: 15px;
+        }
+
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #ffd166, #f8961e);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-right: 5px;
+            transition: transform 0.3s;
+        }
+
+        .btn-edit:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, var(--danger-color), #b5179e);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .btn-delete:hover {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-footer {
+            border: none;
+            padding: 20px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px 15px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(67,97,238,0.1);
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, var(--success-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 10px;
+        }
+
+        .btn-cancel {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 10px;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-top: 10px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .user-info {
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .btn-logout {
+                width: 100%;
+            }
+
+            .page-header {
+                margin-top: 80px;
+                padding: 20px;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+            .btn-add {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .nav-tabs .nav-link {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+
+            .table-container {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-body {
+                padding: 30px 20px;
+            }
+        }
+
+        .form-group {
+    margin-bottom: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
-.modal-header h5 {
-  color: white !important;
-}
- .btn-close {
-  filter: invert(1) brightness(2); /* เปลี่ยนสีไอคอนเป็นสีขาว */
-}
-  
-  .modal-backdrop {
-  opacity: 0.2; /* ทำให้มืดน้อยลง */
-  background-color: #fff; /* เปลี่ยนเป็นสีขาว */
-}
-  
-.vertical-line2 {
+
+.form-group i {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px !important; /* ใช้ !important เพื่อบังคับให้มีผล */
-    height: 100%;
-    background-color: #ccc; /* สีของเส้น */
-    transform: translateX(-50%);
-    z-index: 10; /* ทำให้เส้นอยู่ด้านบน */
-    pointer-events: none; /* ป้องกันการคลิกที่เส้น */
-  
+    left: 15px;
+    color: #667eea;
+    font-size: 18px;
+    z-index: 2;
+}
+
+.form-control {
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    padding-left: 40px;  /* เพิ่ม padding-left ให้มากขึ้น */
+    font-size: 15px;
+    width: 100%;
+    background-color: white;
+}
+
+/* ทำให้เห็นไอคอนชัดเจนขึ้น */
+.form-group i.fa-envelope,
+.form-group i.fa-lock {
+    text-shadow: 0 0 5px rgba(255,255,255,0.8);
 }
     </style>
-  <body>
-    
-   
-    <!-- ===============================================-->
-    <!--    Main Content-->
-    <!-- ===============================================-->
-    <main class="main" id="top">
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-flex align-items-center fw-bolder fs-2 fst-italic" href="#">
-            <div class="text-info">Admin_</div>
-            <div class="text-warning">PageHR</div>
-          </a><button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent1">
-            <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-              <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#">Home</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#jobpage">Jobs</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#pricing">Career tips</a></li>
-            </ul>
-            <form class="ps-lg-5"><a href="jobname.html" class="btn btn-lg btn-primary rounded-pill bg-gradient order-0" style="font-family: line_seed_sans_th, sans-serif;">
-   เพิ่มข้อมูล
-</a>
-</form>
-<!--             <form class="ps-lg-5"><button class="btn btn-lg btn-primary rounded-pill bg-gradient order-0" type="submit">เพิ่มข้อมูล</button></form> -->
-          </div>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>กำลังโหลด...</p>
         </div>
-      </nav>
-      
-<!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="font-family: line_seed_sans_th, sans-serif;background-color: green;color: white !important;">
-        <h5 class="modal-title" id="editModalLabel">แก้ไขข้อมูล</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="editForm" onsubmit="saveData(event)" class="row g-2">
-          <input type="hidden" id="editrowIndex" name="editrowIndex"> <!-- ซ่อน index ของแถว -->
-          
-          <div class="col-12 col-md-6 mb-2">
-            <div class="form-group">
-            <label for="editnamepost" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">ผู้ลงประกาศ</label>
-            <input type="text" class="form-control" id="editnamepost" name="editnamepost" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;">
-          </div>
-            </div>
-          <div class="col-12 col-md-6 mb-2">
-            <div class="form-group">
-            <label for="editposition" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">ตำแหน่งงานที่รับสมัคร</label>
-            <input type="text" class="form-control" id="editposition" name="editposition" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;">
-          </div>
-            </div>
-          <div class="col-12 col-md-4 mb-2">
-            <div class="form-group">
-            <label for="editdepartment" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">แผนกที่รับสมัคร</label>
-<!--             <input type="text" class="form-control" id="editdepartment" name="editdepartment" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-               <select class="form-select" id="editdepartment" name="editdepartment" aria-label="Default select example" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;" required>
-            <option value=''></option>
-            <option value="จัดซื้อ">จัดซื้อ</option>
-            <option value="บุคคลธุการ">บุคคลธุการ</option>
-            <option value="บัญชี">บัญชี</option>
-            <option value="สิ่งแวดล้อม">สิ่งแวดล้อม</option>
-            <option value="ห้องLAB">ห้องLAB</option>
-            <option value="จป">จป</option>
-            <option value="สโตร์และรับสินค้า">สโตร์และรับสินค้า</option>
-            <option value="ช่าง">ช่าง</option>
-            <option value="ผลิต">ผลิต</option>
-            <option value="คิวซี">คิวซี</option>
-            <option value="แพ็คกิ้ง">แพ็คกิ้ง</option>
-            <option value="ไอที">ไอที</option>
-            <option value="DC">DC</option>
-            <option value="รับวัตถุดิบ">รับวัตถุดิบ</option>
-            <option value="ผู้บริหาร">ผู้บริหาร</option>
-            <option value="ส่งเสริมการเกษตร">ส่งเสริมการเกษตร</option>
-            <option value="R&D">R&D</option>
-            <option value="ตามลักษณะการพิการ">ตามลักษณะการพิการ</option>
-          </select>
-          </div>
-            </div>
-          
-           <div class="col-12 col-md-4 mb-2">
-            <div class="form-group">
-            <label for="editeducational" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">วุฒิการศึกษา</label>
-<!--             <input type="text" class="form-control" id="editeducational" name="editeducational" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-               <select class="form-select" id="editeducational" name="editeducational" aria-label="Default select example" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;" required>
-            <option value=''>-เลือก-</option>
-            <option value="ป.4 ขึ้นไป">ป.4 ขึ้นไป</option>
-            <option value="ป.6 ขึ้นไป">ป.6 ขึ้นไป</option>
-             <option value="ม.3 ขึ้นไป">ม.3 ขึ้นไป</option>
-             <option value="ม.6/ปวช ขึ้นไป">ม.6/ปวช ขึ้นไป</option>
-             <option value="ปวส ขึ้นไป">ปวส ขึ้นไป</option>
-             <option value="ปริญญาตรี ขึ้นไป">ปริญญาตรี ขึ้นไป</option>
-             <option value="ปริญญาโท ขึ้นไป">ปริญญาโท ขึ้นไป</option>
-             <option value="ปริญญาเอก ขึ้นไป">ปริญญาเอก ขึ้นไป</option>
-          </select>
-          </div>
-</div>
-         
-          <div class="col-12 col-md-4 mb-2">
-            <div class="form-group">
-            <label for="editheight" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">ส่วนสูง</label>
-<!--             <input type="text" class="form-control" id="editheight" name="editheight" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-             <select class="form-select" id="editheight" name="editheight" aria-label="Default select example" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;" required>
-            <option value=''>-เลือก-</option>
-            <option value="150 ซม.ขึ้นไป">150 ซม.ขึ้นไป</option>
-            <option value="155 ซม.ขึ้นไป">155 ซม.ขึ้นไป</option>
-             <option value="160 ซม.ขึ้นไป">160 ซม.ขึ้นไป</option>
-             <option value="165 ซม.ขึ้นไป">165 ซม.ขึ้นไป</option>
-          </select>
-          </div>
-            </div>
-         
-           <div class="col-12 col-md-3 mb-2">
-            <div class="form-group">
-            <label for="editage" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">อายุ</label>
-            <input type="number" class="form-control" id="editage" name="editage" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;">
-          </div>
-            </div>
-          
-
-          <div class="col-12 col-md-3 mb-2">
-            <div class="form-group">
-            <label for="editchoose" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">สถานะการรับสมัคร</label>
-<!--             <input type="text" class="form-control" id="editchoose" name="editchoose" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-             <select class="form-select" id="editchoose" name="editchoose" aria-label="Default select example" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;" required>
-            <option value=''>-เลือก-</option>
-            <option value="เปิดรับสมัคร">เปิดรับสมัคร</option>
-            <option value="เปิดรับสมัคร ด่วน!!!">เปิดรับสมัคร ด่วน!!!</option>
-            <option value="ปิดรับสมัคร">ปิดรับสมัคร</option>
-          </select>
-          </div>
-            </div>
-          <div class="col-12 col-md-3 mb-2">
-            <div class="form-group">
-            <label for="editrate" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">ตำแหน่ง</label>
-<!--             <input type="text" class="form-control" id="editrate" name="editrate" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-             <select class="form-select" id="editrate" name="editrate" aria-label="Default select example" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;" required>
-            <option value=''>-เลือก-</option>
-            <option value="รายวัน">รายวัน</option>
-            <option value="รายเดือน">รายเดือน</option>
-               <option value="รายวัน-คนพิการ">รายวัน-คนพิการ</option>
-          </select>
-          </div>
-            </div>
-          <div class="col-12 col-md-3 mb-2">
-            <div class="form-group">
-            <label for="edittotal" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">จำนวน</label>
-            <input type="number" class="form-control" id="edittotal" name="edittotal" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;">
-          </div>
-            </div>
-          
-                    <div class="col-12 col-md-12 mb-2">
-            <div class="form-group">
-            <label for="editfeature" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">คุณสมบัติ</label>
-<!--             <input type="text" class="form-control" id="editfeature" name="editfeature" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-             <textarea class="form-control" id="editfeature" name="editfeature" rows="4" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"></textarea>
-          </div>
-            </div>
-          <div class="col-12 col-md-12 mb-2">
-            <div class="form-group">
-            <label for="editother" class="form-label" style="font-family: line_seed_sans_th, sans-serif;green;color: black !important;">อื่นๆ</label>
-<!--             <input type="text" class="form-control" id="editother" name="editother" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"> -->
-             <textarea class="form-control" id="editother" name="editother" rows="3" style="font-family: line_seed_sans_th, sans-serif;green;color: blue !important;"></textarea>
-          </div>
-            </div>
-          
-          
-        </form>
-      </div>
-      <!-- ฟุตเตอร์ -->
-      <div class="modal-footer d-flex justify-content-end" style="font-family: line_seed_sans_th, sans-serif;background-color: green;color: white !important;">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-family: line_seed_sans_th, sans-serif;green;color: white !important;">ยกเลิก</button>
-        <button type="button" class="btn btn-primary" onclick="saveData(event)" style="font-family: line_seed_sans_th, sans-serif;green;color: white !important;">บันทึก</button>
-      </div>
     </div>
-  </div>
-</div>
 
-
-
-
-      <section class="py-8" id="home">
-        <div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;"></div>
-        <!--/.bg-holder-->
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-9 col-lg-6 text-center mb-3">
-              <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">จัดการแก้ไขตำแหน่งงาน</h5>
-<!--               <p class="mb-5">กดรูปตาเพื่อดูรายละเอียดแบบเต็มแนวตั้ง</p> -->
-            </div>
-          </div>
-          <div class="row flex-center h-100">
-            <div class="col-12 col-xl-12">
-              <div class="row">
-                <div class="col-sm-12 col-lg-12 pb-lg-6 px-lg-4 pb-4">
-<!--                   <div class="card py-4 shadow-sm h-100"> -->
-<!--                     <div class="text-center"> <img src="https://themewagon.github.io/jobest/v1.0.0/assets/img/illustrations/finance.png" height="120" alt="" /> -->
-                      <div class="card-body px-2">
-                        <h6 class="fw-bold fs-1 heading-color">พนักงานรายวัน</h6>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container animate__animated animate__fadeIn">
+            <!-- <a href="#" class="back-link" onclick="showPublicPage()">
+                <i class="fas fa-arrow-left me-2"></i>กลับหน้าหลัก
+            </a> -->
+            
+            <div class="login-card">
+                <div class="login-header">
+                    <h2><i class="fas fa-user-shield me-2"></i>HR Admin</h2>
+                    <p>เข้าสู่ระบบเพื่อจัดการข้อมูล</p>
+                </div>
+                <div class="login-body">
+                    <div id="alertMessage" class="alert d-none"></div>
                     
-                         <div class="table-responsive">
-          <table id="data-tableday" class="table table-bordered cell-border " style="width:100%">
-            <thead class="bg-secondary text-white"></thead>
-          </table>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" class="form-control" id="email" placeholder="อีเมล" required>
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" class="form-control" id="password" placeholder="รหัสผ่าน" required>
+                        </div>
+                        <button type="submit" class="btn-login">
+                            <i class="fas fa-sign-in-alt me-2"></i>เข้าสู่ระบบ
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p><i class="far fa-copyright me-1"></i>จัดทำโดย นาย ภาคภูมิ เรือนมูล HrSupport</p>
+            </div>
         </div>
-                      </div>
-                    </div>
-                 
-<!--                 </div> -->
-                <div class="col-sm-12 col-lg-12 pb-lg-6 px-lg-4 pb-4">
-              
-                      <div class="card-body px-2">
-                        <h6 class="fw-bold fs-1 heading-color">พนักงานรายเดือน</h6>
-                    
-                         <div class="table-responsive">
-          <table id="data-tablemonth" class="table table-bordered cell-border" style="width:100%">
-            <thead class="bg-secondary text-white"></thead>
-          </table>
-                      </div>
-                    </div>
-                  </div>
-                
-                
-                 <div class="col-sm-12 col-lg-12 pb-lg-6 px-lg-4 pb-4">
-              
-                      <div class="card-body px-2">
-                        <h6 class="fw-bold fs-1 heading-color">พนักงานรายวัน(คนพิการ)</h6>
-                    
-                         <div class="table-responsive">
-          <table id="data-tabledisabledperson" class="table table-bordered cell-border" style="width:100%">
-            <thead class="bg-secondary text-white"></thead>
-          </table>
-                      </div>
-                    </div>
-                  </div>
-                
-               </div>
-    
-              
-              
-              </div>
+    </div>
+
+    <!-- Admin Page -->
+    <div id="adminPage" class="admin-page">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-crown me-2"></i>
+                    <span>Admin</span> Panel
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <div class="user-info mb-2 mb-lg-0">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="userEmail">กำลังโหลด...</span>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn-logout w-100" onclick="logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>ออกจากระบบ
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-       
-      </section>
+        </nav>
 
-
-
-      <section class="py-0 bg-primary-gradient">
-        <div class="bg-holder" style="background-image:url(assets/img/illustrations/footer-bg.png);background-position:center;background-size:cover;"></div>
-        <!--/.bg-holder-->
+        <!-- Main Content -->
         <div class="container">
-       
- 
-          <div class="row justify-content-center">
-            <div class="col-auto mb-2">
-              <p class="mb-2 fs--1 text-white my-2 text-center">&copy; เรียบเรียงโดย นาย ภาคภูมิ เรือนมูล HrSupport &nbsp;<svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1F3A63" viewBox="0 0 16 16">
-                  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
-                </svg>&nbsp;by&nbsp;<a class="text-white" href="https://themewagon.com/" target="_blank">ThemeWagon </a></p>
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1><i class="fas fa-cog me-3"></i>จัดการข้อมูลรับสมัครงาน</h1>
+                        <p class="text-muted mb-0">เพิ่ม แก้ไข ลบ ข้อมูลประกาศรับสมัครงาน</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button class="btn-add" onclick="showAddModal()">
+                            <i class="fas fa-plus-circle me-2"></i>เพิ่มข้อมูลใหม่
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Tabs -->
+                <ul class="nav nav-tabs" id="jobTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button">
+                            <i class="fas fa-sun"></i> พนักงานรายวัน
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="monthly-tab" data-bs-toggle="tab" data-bs-target="#monthly" type="button">
+                            <i class="fas fa-calendar-alt"></i> พนักงานรายเดือน
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled" type="button">
+                            <i class="fas fa-wheelchair"></i> พนักงานรายวัน (คนพิการ)
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="jobTabsContent">
+                    <!-- Daily Jobs -->
+                    <div class="tab-pane fade show active" id="daily" role="tabpanel">
+                        <div class="table-container">
+                            <table id="dailyTable" class="table table-bordered cell-border" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ผู้ลงประกาศ</th>
+                                        <th>ตำแหน่ง</th>
+                                        <th>แผนก</th>
+                                        <th>อายุ</th>
+                                        <th>วุฒิ</th>
+                                        <th>สถานะ</th>
+                                        <th>จำนวน</th>
+                                        <th>วันที่</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Jobs -->
+                    <div class="tab-pane fade" id="monthly" role="tabpanel">
+                        <div class="table-container">
+                            <table id="monthlyTable" class="table table-hover responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ผู้ลงประกาศ</th>
+                                        <th>ตำแหน่ง</th>
+                                        <th>แผนก</th>
+                                        <th>อายุ</th>
+                                        <th>วุฒิ</th>
+                                        <th>สถานะ</th>
+                                        <th>จำนวน</th>
+                                        <th>วันที่</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Disabled Jobs -->
+                    <div class="tab-pane fade" id="disabled" role="tabpanel">
+                        <div class="table-container">
+                            <table id="disabledTable" class="table table-hover responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ผู้ลงประกาศ</th>
+                                        <th>ตำแหน่ง</th>
+                                        <th>แผนก</th>
+                                        <th>อายุ</th>
+                                        <th>วุฒิ</th>
+                                        <th>สถานะ</th>
+                                        <th>จำนวน</th>
+                                        <th>วันที่</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
-    </main><!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://unpkg.com/sheetrock@1.2.0/dist/sheetrock.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>  
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var navbarToggler = document.querySelector(".navbar-toggler");
-    var navbarCollapse = document.querySelector("#navbarSupportedContent1");
+        <!-- Footer -->
+        <div class="footer">
+            <p><i class="far fa-copyright me-1"></i>จัดทำโดย นาย ภาคภูมิ เรือนมูล HrSupport</p>
+        </div>
 
-    navbarToggler.addEventListener("click", function () {
-        var isExpanded = navbarCollapse.classList.contains("show");
-        if (isExpanded) {
-            navbarCollapse.classList.remove("show");
-        } else {
-            navbarCollapse.classList.add("show");
+        <!-- Add/Edit Modal -->
+        <div class="modal fade" id="jobModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">
+                            <i class="fas fa-plus-circle me-2"></i>เพิ่มข้อมูลใหม่
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="jobForm">
+                            <input type="hidden" id="jobId">
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">ผู้ลงประกาศ</label>
+                                    <input type="text" class="form-control" id="namepost" list="posterList" required>
+                                    <datalist id="posterList">
+                                        <option value="กันทิมา สินธุผัด">
+                                        <option value="ปวีณา เหมืองจา">
+                                    </datalist>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">ตำแหน่งงาน</label>
+                                    <input type="text" class="form-control" id="position" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">แผนก</label>
+                                    <select class="form-select" id="department" required>
+                                        <option value="">เลือกแผนก</option>
+                                        <option value="จัดซื้อ">จัดซื้อ</option>
+                                        <option value="บุคคลธุการ">บุคคลธุการ</option>
+                                        <option value="บัญชี">บัญชี</option>
+                                        <option value="สิ่งแวดล้อม">สิ่งแวดล้อม</option>
+                                        <option value="ห้องLAB">ห้องLAB</option>
+                                        <option value="จป">จป</option>
+                                        <option value="สโตร์และรับสินค้า">สโตร์และรับสินค้า</option>
+                                        <option value="ช่าง">ช่าง</option>
+                                        <option value="ผลิต">ผลิต</option>
+                                        <option value="คิวซี">คิวซี</option>
+                                        <option value="แพ็คกิ้ง">แพ็คกิ้ง</option>
+                                        <option value="ไอที">ไอที</option>
+                                        <option value="DC">DC</option>
+                                        <option value="รับวัตถุดิบ">รับวัตถุดิบ</option>
+                                        <option value="ผู้บริหาร">ผู้บริหาร</option>
+                                        <option value="ส่งเสริมการเกษตร">ส่งเสริมการเกษตร</option>
+                                        <option value="R&D">R&D</option>
+                                        <option value="ตามลักษณะการพิการ">ตามลักษณะการพิการ</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">อายุ</label>
+                                    <input type="text" class="form-control" id="age" placeholder="เช่น 20-35 ปี" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">ส่วนสูง</label>
+                                    <select class="form-select" id="height" required>
+                                        <option value="">เลือกส่วนสูง</option>
+                                        <option value="150 ซม.ขึ้นไป">150 ซม.ขึ้นไป</option>
+                                        <option value="155 ซม.ขึ้นไป">155 ซม.ขึ้นไป</option>
+                                        <option value="160 ซม.ขึ้นไป">160 ซม.ขึ้นไป</option>
+                                        <option value="165 ซม.ขึ้นไป">165 ซม.ขึ้นไป</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">วุฒิการศึกษา</label>
+                                    <select class="form-select" id="educational" required>
+                                        <option value="">เลือกวุฒิ</option>
+                                        <option value="ป.4 ขึ้นไป">ป.4 ขึ้นไป</option>
+                                        <option value="ป.6 ขึ้นไป">ป.6 ขึ้นไป</option>
+                                        <option value="ม.3 ขึ้นไป">ม.3 ขึ้นไป</option>
+                                        <option value="ม.6/ปวช ขึ้นไป">ม.6/ปวช ขึ้นไป</option>
+                                        <option value="ปวส ขึ้นไป">ปวส ขึ้นไป</option>
+                                        <option value="ปริญญาตรี ขึ้นไป">ปริญญาตรี ขึ้นไป</option>
+                                        <option value="ปริญญาโท ขึ้นไป">ปริญญาโท ขึ้นไป</option>
+                                        <option value="ปริญญาเอก ขึ้นไป">ปริญญาเอก ขึ้นไป</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">สถานะ</label>
+                                    <select class="form-select" id="status" required>
+                                        <option value="">เลือกสถานะ</option>
+                                        <option value="เปิดรับสมัคร">เปิดรับสมัคร</option>
+                                        <option value="เปิดรับสมัคร ด่วน!!!">เปิดรับสมัคร ด่วน!!!</option>
+                                        <option value="ปิดรับสมัคร">ปิดรับสมัคร</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">ประเภท</label>
+                                    <select class="form-select" id="type" required>
+                                        <option value="">เลือกประเภท</option>
+                                        <option value="รายวัน">รายวัน</option>
+                                        <option value="รายเดือน">รายเดือน</option>
+                                        <option value="รายวัน-คนพิการ">รายวัน-คนพิการ</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">จำนวนอัตรา</label>
+                                    <input type="number" class="form-control" id="total" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">คุณสมบัติ</label>
+                                <textarea class="form-control" id="feature" rows="3"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">ลักษณะงาน</label>
+                                <textarea class="form-control" id="other" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>ยกเลิก
+                        </button>
+                        <button type="button" class="btn-save" onclick="saveJob()">
+                            <i class="fas fa-save me-2"></i>บันทึก
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD4VAhT9Bp7-_P0s4UOQlJMEK1bxn2770w",
+            authDomain: "bookcarcm.firebaseapp.com",
+            databaseURL: "https://bookcarcm-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bookcarcm",
+            storageBucket: "bookcarcm.firebasestorage.app",
+            messagingSenderId: "540662345211",
+            appId: "1:540662345211:web:0e4dbf2ee2516a267c6f5e",
+            measurementId: "G-V748ZCZZP5"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+
+        // Check authentication state
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is logged in, show admin page
+                showAdminPage();
+                document.getElementById('userEmail').textContent = user.email;
+                loadData();
+            } else {
+                // User is not logged in, show login page
+                showLoginPage();
+            }
+        });
+
+        // Show login page
+        function showLoginPage() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('adminPage').style.display = 'none';
         }
-    });
-});
 
- 
-    // ฟังก์ชันแปลงวันที่เป็น dd-mm-yyyy HH:mm (ปี พ.ศ.)
-function formatDateTime(dateTimeString) {
-    let date = new Date(dateTimeString);
-    if (isNaN(date.getTime())) {
-        return dateTimeString; // ถ้าไม่ใช่วันที่ ให้คืนค่าเดิม
-    }
-    let day = String(date.getDate()).padStart(2, '0');
-    let month = String(date.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มจาก 0
-    let year = date.getFullYear() + 543; // แปลงเป็นปี พ.ศ.
-    let hours = String(date.getHours()).padStart(2, '0');
-    let minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${day}-${month}-${year} ${hours}:${minutes}`;
-}
-    
-  
-$(document).ready(function() {
-    var googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyLJauIc1kRYqHgxiIhADFZpzYATgX9zHGAaqL-W0ICZix1qlD1sOu83wPlaHG0284h/exec?origin=' + encodeURIComponent(window.location.origin);
+        // Show admin page
+        function showAdminPage() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('adminPage').style.display = 'block';
+        }
 
-  
+        // Show public page (for back button)
+        function showPublicPage() {
+            window.location.href = 'index.html';
+        }
 
+        // Handle login form
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const alertDiv = document.getElementById('alertMessage');
+            
+            try {
+                showLoading();
+                await auth.signInWithEmailAndPassword(email, password);
+                hideLoading();
+            } catch (error) {
+                hideLoading();
+                alertDiv.classList.remove('d-none', 'alert-success');
+                alertDiv.classList.add('alert-danger');
+                
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    alertDiv.textContent = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+                } else if (error.code === 'auth/invalid-email') {
+                    alertDiv.textContent = 'รูปแบบอีเมลไม่ถูกต้อง';
+                } else {
+                    alertDiv.textContent = 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง';
+                }
+                
+                setTimeout(() => {
+                    alertDiv.classList.add('d-none');
+                }, 5000);
+            }
+        });
 
-  
-    $('#data-tableday, #data-tablemonth, #data-tabledisabledperson').html('<div class="spinner-container"><div class="spinner-border text-info me-2" role="status"></div> กำลังโหลดข้อมูล...</div>');
-
-    $.ajax({
-        url: googleScriptUrl,
-        dataType: 'json',
-        headers: {
-            'Referer': window.location.href
-        },
-        success: function(data) {
-            $('#data-tableday, #data-tablemonth, #data-tabledisabledperson').empty();
-
-            var headerRow = [
-                { title: 'ลำดับ', data: 0 },
-                { title: 'ผู้ลงประกาศ', data: 1 },
-                { title: 'ตำแหน่งงาน', data: 2 },
-                { title: 'แผนก', data: 3 },
-                { title: 'อายุ', data: 4 },
-                { title: 'ส่วนสูง', data: 5 },
-                { title: 'วุฒิการศึกษา', data: 6 },
-                { title: 'คุณสมบัติ', data: 7 },
-                { title: 'อื่นๆ', data: 8 },
-                { title: 'สถานะ', data: 9 },
-                { title: 'ตำแหน่ง', data: 10 },
-              { title: 'จำนวน', data: 11 },
-                { 
-                    title: 'วันที่และเวลาที่ลงประกาศ', 
-                    data: 12,
-                    render: function(data) {
-                        return formatDateTime(data);
-                    }
-                },
-              
-                { title: 'แก้ไขลบ', data: 13 }
-            ];
-
-            var tableRowsDay = [];
-            var tableRowsMonth = [];
-          var tableRowsdisabledperson = [];
-
-            $.each(data, function(index, row) {
-                var editButton = '<button type="button" onclick="editData(this);" class="btn btn-success edit-button" data-bs-toggle="modal" data-bs-target="#editModal" data-index="' + index + '" data-row=\'' + JSON.stringify(row) + '\'><i class="fa-solid fa-pen-to-square" style="color: white;"></i></button>';
-        var deleteButton = '<button type="button" onclick="deleteData(\'' + row['ลำดับ'] + '\');" class="btn btn-danger delete-button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>';
-
-        var actionButtons = '<div class="btn-group" role="group">' + editButton + deleteButton + '</div>';
-
-                var rowData = [
-                    row['ลำดับ'],
-                    row['ผู้ลงประกาศ'],
-                    row['ตำแหน่งงาน'],
-                    row['แผนก'],
-                    row['อายุ'],
-                    row['ส่วนสูง'],
-                    row['วุฒิการศึกษา'],
-                    row['คุณสมบัติ'],
-                    row['อื่นๆ'],
-                    row['สถานะ'],
-                    row['ตำแหน่ง'],
-                    row['จำนวน'],
-                    row['วันที่และเวลาที่ลงประกาศ'],
-                   
-                    actionButtons
-                ];
-
-                if (row['ตำแหน่ง'] === 'รายวัน') {
-                    tableRowsDay.push(rowData);
-                } else if (row['ตำแหน่ง'] === 'รายเดือน') {
-                    tableRowsMonth.push(rowData);
-                } else if (row['ตำแหน่ง'] === 'รายวัน-คนพิการ') {
-                    tableRowsdisabledperson.push(rowData);
+        // Logout function
+        window.logout = function() {
+            Swal.fire({
+                title: 'ต้องการออกจากระบบ?',
+                text: 'คุณจะถูกนำกลับไปยังหน้าเข้าสู่ระบบ',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#4361ee',
+                cancelButtonColor: '#f72585',
+                confirmButtonText: 'ใช่, ออกจากระบบ',
+                cancelButtonText: 'ยกเลิก'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    auth.signOut();
                 }
             });
+        };
 
-            function createDataTable(selector, data) {
-                $(selector).DataTable({
-                    data: data,
-                    columns: headerRow,
-                    dom: 't',
-                    info: true,
-                    responsive: true,
-                    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-                    order: [[0, 'asc']],
-                    destroy: true,
-                    columnDefs: [
-                        { targets: [2, 4, 6, 13], className: 'all' }
-                    ]
+        // Show loading
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        // Hide loading
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        // Format date
+        function formatDate(timestamp) {
+            if (!timestamp) return '-';
+            const date = new Date(timestamp);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear() + 543;
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
+
+        // Get status badge
+        function getStatusBadge(status) {
+            if (status === 'เปิดรับสมัคร ด่วน!!!') {
+                return '<span class="badge bg-danger"><i class="fas fa-exclamation-circle me-1"></i>ด่วน!!!</span>';
+            } else if (status === 'เปิดรับสมัคร') {
+                return '<span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>เปิดรับสมัคร</span>';
+            } else {
+                return '<span class="badge bg-secondary"><i class="fas fa-times-circle me-1"></i>ปิดรับสมัคร</span>';
+            }
+        }
+
+        // Load data
+        function loadData() {
+            showLoading();
+            
+            database.ref('jobs').once('value', snapshot => {
+                const jobs = [];
+                snapshot.forEach(childSnapshot => {
+                    jobs.push({
+                        id: childSnapshot.key,
+                        ...childSnapshot.val()
+                    });
                 });
+
+                const dailyJobs = jobs.filter(job => job.ตำแหน่ง === 'รายวัน');
+                const monthlyJobs = jobs.filter(job => job.ตำแหน่ง === 'รายเดือน');
+                const disabledJobs = jobs.filter(job => job.ตำแหน่ง === 'รายวัน-คนพิการ');
+
+                const sortByDate = (a, b) => (b.วันที่และเวลาที่ลงประกาศ || 0) - (a.วันที่และเวลาที่ลงประกาศ || 0);
+                
+                renderTable('dailyTable', dailyJobs.sort(sortByDate));
+                renderTable('monthlyTable', monthlyJobs.sort(sortByDate));
+                renderTable('disabledTable', disabledJobs.sort(sortByDate));
+
+                hideLoading();
+            });
+        }
+
+        // Render table
+        function renderTable(tableId, data) {
+            if ($.fn.DataTable.isDataTable(`#${tableId}`)) {
+                $(`#${tableId}`).DataTable().destroy();
             }
 
-            createDataTable('#data-tableday', tableRowsDay);
-            createDataTable('#data-tablemonth', tableRowsMonth);
-          createDataTable('#data-tabledisabledperson', tableRowsdisabledperson);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error fetching data:', status, error);
+            const table = $(`#${tableId}`).DataTable({
+                data: data,
+                columns: [
+                    { data: 'ผู้ลงประกาศ' , visible: false},
+                    { data: 'ตำแหน่งงาน' },
+                    { data: 'แผนก' },
+                    { data: 'อายุ' },
+                    { data: 'วุฒิการศึกษา' },
+                    {
+                        data: 'สถานะ',
+                        render: data => getStatusBadge(data)
+                    },
+                    { data: 'จำนวน' },
+                    {
+                        data: 'วันที่และเวลาที่ลงประกาศ',
+                        render: data => formatDate(data)
+                    },
+                    {
+                        data: null,
+                        render: data => `
+                            <div>
+                                <button class="btn-edit" onclick='editJob(${JSON.stringify(data).replace(/'/g, "\\'")})'>
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-delete" onclick="deleteJob('${data.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `
+                    }
+                ],
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json'
+                },
+                order: [[7, 'desc']],
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, 'ทั้งหมด']]
+            });
         }
-    });
-});
-   
- 
-    
-    function editData(button) {
-  var index = $(button).data('index');
-  var row = $(button).data('row');
- 
-  // ตั้งค่าข้อมูลใน input ใน modal
-  $('#editrowIndex').val(row['ลำดับ']);
-  $('#editnamepost').val(row['ผู้ลงประกาศ']);
-  $('#editposition').val(row['ตำแหน่งงาน']);
-   $('#editdepartment').val(row['แผนก']);
-      $('#editage').val(row['อายุ']);
-      $('#editheight').val(row['ส่วนสูง']);
-      $('#editeducational').val(row['วุฒิการศึกษา']);
-      $('#editfeature').val(row['คุณสมบัติ']);
-      $('#editother').val(row['อื่นๆ']);
-      $('#editchoose').val(row['สถานะ']);
-      $('#editrate').val(row['ตำแหน่ง']);
-      $('#edittotal').val(row['จำนวน']);
 
-  // กำหนดค่า index ของแถวที่ต้องการแก้ไขให้กับ modal
-  $('#editModal').data('index', index);
+        // Show add modal
+        window.showAddModal = function() {
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus-circle me-2"></i>เพิ่มข้อมูลใหม่';
+            document.getElementById('jobForm').reset();
+            document.getElementById('jobId').value = '';
+            new bootstrap.Modal(document.getElementById('jobModal')).show();
+        };
 
-  // แสดง modal
-  $('#editModal').modal('show');
-}
+        // Edit job
+        window.editJob = function(job) {
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit me-2"></i>แก้ไขข้อมูล';
+            
+            document.getElementById('jobId').value = job.id || '';
+            document.getElementById('namepost').value = job.ผู้ลงประกาศ || '';
+            document.getElementById('position').value = job.ตำแหน่งงาน || '';
+            document.getElementById('department').value = job.แผนก || '';
+            document.getElementById('age').value = job.อายุ || '';
+            document.getElementById('height').value = job.ส่วนสูง || '';
+            document.getElementById('educational').value = job.วุฒิการศึกษา || '';
+            document.getElementById('status').value = job.สถานะ || '';
+            document.getElementById('type').value = job.ตำแหน่ง || '';
+            document.getElementById('total').value = job.จำนวน || '';
+            document.getElementById('feature').value = job.คุณสมบัติ || '';
+            document.getElementById('other').value = job.อื่นๆ || '';
+            
+            new bootstrap.Modal(document.getElementById('jobModal')).show();
+        };
 
-    
-     var googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyLJauIc1kRYqHgxiIhADFZpzYATgX9zHGAaqL-W0ICZix1qlD1sOu83wPlaHG0284h/exec?origin=' + encodeURIComponent(window.location.origin);
-
-  
-    
-    function saveData(event) {
-      event.preventDefault(); // หยุดการส่งค่าฟอร์มทางเบราว์เซอร์
-    Swal.fire({
-            position: 'center',
-            title: '<h4>กำลังบันทึกข้อมูล...</h4>',
-            showConfirmButton: false,
-          })
-           Swal.showLoading()
-      // ดึงข้อมูลที่แก้ไขจาก input ใน modal
-    var id = document.getElementById("editrowIndex").value;
-    var editnamepost = document.getElementById("editnamepost").value;
-    var editposition = document.getElementById("editposition").value;
-    var editdepartment = document.getElementById("editdepartment").value;
-   var editage = document.getElementById("editage").value;
-  var editheight = document.getElementById("editheight").value;
-  var editeducational = document.getElementById("editeducational").value;
-  var editfeature = document.getElementById("editfeature").value;
-  var editother = document.getElementById("editother").value;
-  var editchoose = document.getElementById("editchoose").value;
-  var editrate = document.getElementById("editrate").value;
-  var edittotal = document.getElementById("edittotal").value;
-
-      // สร้าง JSON object ที่มีข้อมูลที่แก้ไขแล้ว
-      var editedData = {
-   
-        'ลำดับ': id,
-        'ผู้ลงประกาศ': editnamepost,
-        'ตำแหน่งงาน': editposition,
-        'แผนก': editdepartment,
-        'อายุ': editage,
-        'ส่วนสูง': editheight,
-        'วุฒิการศึกษา': editeducational,
-        'คุณสมบัติ': editfeature,
-        'อื่นๆ': editother,
-        'สถานะ': editchoose,
-        'ตำแหน่ง': editrate,
-        'จำนวน': edittotal
-      };
-
-      // แปลง JSON object เป็น string JSON
-      var jsonData = JSON.stringify(editedData);
-
-      fetch(googleScriptUrl, {
-        method: 'POST',
-        body: jsonData // ข้อมูลที่แก้ไข
-      })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("editForm").reset();
-       Swal.fire({
-  position: 'center',
-  icon: 'success',
-  title: 'แก้ไขข้อมูลเรียบร้อยแล้ว',
-  showConfirmButton: false,
-  timer: 2500
-})
-        console.log(data);
-        location.reload();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
-
-
-       // ฟังก์ชั่น deleteData เพื่อลบข้อมูล
-    function deleteData(id) {
-      Swal.fire({
-        //title: "Are you sure?",
-        text: "คุณต้องการลบข้อมูลใช่หรือไม่!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "ใช่ลบข้อมูล"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-              position: 'center',
-              title: '<h4>กำลังลบข้อมูล...</h4>',
-              showConfirmButton: false,
-          });
-          Swal.showLoading();
-          // ส่งข้อมูล ID ที่ต้องการลบไปยัง Google Apps Script ผ่าน AJAX request
-          $.ajax({
-            url: googleScriptUrl, // URL ของ Google Apps Script
-            method: 'POST',
-            dataType: 'json',
-            data: { id: id }, // ส่งข้อมูล ID เพื่อลบ
-            success: function(response) {
-              if (response.success) {
-                Swal.fire({
-                  //title: "ลบข้อมูล",
-                  text: "ลบข้อมูลเรียบร้อยแล้ว",
-                  icon: "success",
-                  showConfirmButton: false,
-                  timer: 1500
-                }).then(() => {
-                  // รีโหลดหน้าหลังจากที่ข้อมูลถูกลบเรียบร้อย
-                  location.reload();
-                });
-              } else {
-                alert('การโหลดข้อมูลผิดพลาดกรุณาลองใหม่อีกครั้ง');
-              }
-            },
-            error: function(xhr, status, error) {
-              alert('การโหลดข้อมูลผิดพลาดกรุณาลองใหม่อีกครั้ง');
+        // Save job
+        window.saveJob = function() {
+            const form = document.getElementById('jobForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
             }
-          });
-        }
-      });
-    }
-    
- 
-    
-   
 
-    
-  </script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="https://themewagon.github.io/jobest/v1.0.0/vendors/@popperjs/popper.min.js"></script>
-    <script src="https://themewagon.github.io/jobest/v1.0.0/vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="https://themewagon.github.io/jobest/v1.0.0/vendors/is/is.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="https://themewagon.github.io/jobest/v1.0.0/assets/js/theme.js"></script>
-<!--     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet"> -->
-  </body>
+            showLoading();
 
+            const jobData = {
+                ผู้ลงประกาศ: document.getElementById('namepost').value,
+                ตำแหน่งงาน: document.getElementById('position').value,
+                แผนก: document.getElementById('department').value,
+                อายุ: document.getElementById('age').value,
+                ส่วนสูง: document.getElementById('height').value,
+                วุฒิการศึกษา: document.getElementById('educational').value,
+                คุณสมบัติ: document.getElementById('feature').value,
+                อื่นๆ: document.getElementById('other').value,
+                สถานะ: document.getElementById('status').value,
+                ตำแหน่ง: document.getElementById('type').value,
+                จำนวน: document.getElementById('total').value,
+                วันที่และเวลาที่ลงประกาศ: Date.now()
+            };
+
+            const jobId = document.getElementById('jobId').value;
+
+            if (jobId) {
+                // Update existing job
+                database.ref(`jobs/${jobId}`).update(jobData)
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'บันทึกข้อมูลสำเร็จ',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        bootstrap.Modal.getInstance(document.getElementById('jobModal')).hide();
+                        loadData();
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'เกิดข้อผิดพลาด',
+                            text: error.message
+                        });
+                    })
+                    .finally(() => {
+                        hideLoading();
+                    });
+            } else {
+                // Add new job
+                database.ref('jobs').push(jobData)
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'เพิ่มข้อมูลสำเร็จ',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        bootstrap.Modal.getInstance(document.getElementById('jobModal')).hide();
+                        loadData();
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'เกิดข้อผิดพลาด',
+                            text: error.message
+                        });
+                    })
+                    .finally(() => {
+                        hideLoading();
+                    });
+            }
+        };
+
+        // Delete job
+        window.deleteJob = function(jobId) {
+            Swal.fire({
+                title: 'ยืนยันการลบข้อมูล',
+                text: 'คุณแน่ใจหรือไม่ที่จะลบข้อมูลนี้? การกระทำนี้ไม่สามารถเรียกคืนได้',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f72585',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'ใช่, ลบข้อมูล',
+                cancelButtonText: 'ยกเลิก'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    showLoading();
+                    
+                    database.ref(`jobs/${jobId}`).remove()
+                        .then(() => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'ลบข้อมูลสำเร็จ',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            loadData();
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'เกิดข้อผิดพลาด',
+                                text: error.message
+                            });
+                        })
+                        .finally(() => {
+                            hideLoading();
+                        });
+                }
+            });
+        };
+
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+</body>
 </html>
